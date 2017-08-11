@@ -1,9 +1,10 @@
-package examples
+package main
 
 import (
 	"os"
 	"fmt"
 	"syscall"
+	"github.com/ninazu/go-helpers"
 )
 
 func main() {
