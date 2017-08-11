@@ -1,4 +1,4 @@
-package go_helpers
+package interrupt
 
 import (
 	"os"
