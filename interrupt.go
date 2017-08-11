@@ -1,4 +1,4 @@
-package interrupt
+package ninazu
 
 import (
 	"os"

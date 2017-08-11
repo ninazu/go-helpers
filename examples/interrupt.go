@@ -4,11 +4,10 @@ import (
 	"os"
 	"fmt"
 	"syscall"
-	"github.com/ninazu/go-helpers/interrupt"
 )
 
 func main() {
-	waitInterrupt(interruptCallback, []os.Signal{
+	ninazu.WaitInterrupt(interruptCallback, []os.Signal{
 		syscall.SIGINT,
 		syscall.SIGTERM,
 		syscall.SIGQUIT,
