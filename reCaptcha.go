@@ -9,6 +9,11 @@ type reCaptcha struct {
 	key string
 }
 
+type response struct {
+	Id    string
+	Token string
+}
+
 func ReCaptcha(key string) (*reCaptcha) {
 	return &reCaptcha{
 		key: key,
@@ -41,11 +46,16 @@ func (r *reCaptcha) ReportBadCaptcha(id string) {
 	sendRequest(r.buildUrl("res.php", &v))
 }
 
-func (r *reCaptcha) GetCaptcha(captchaKey, pageUrl string) {
+func (r *reCaptcha) GetCaptcha(captchaKey, pageUrl string) *response {
 	v := url.Values{}
 	v.Set("method", "userrecaptcha")
 	v.Set("googlekey", captchaKey)
 	v.Set("pageurl", pageUrl)
 
 	sendRequest(r.buildUrl("in.php", &v))
+
+	return &response{
+		Id:    "1",
+		Token: "Hello",
+	}
 }
