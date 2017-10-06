@@ -5,8 +5,14 @@ import (
 	"net/http"
 )
 
-type ReCaptcha struct {
+type reCaptcha struct {
 	key string
+}
+
+func ReCaptcha(key string) (*reCaptcha) {
+	return &reCaptcha{
+		key: key,
+	}
 }
 
 func sendRequest(url string) (*http.Response) {
@@ -19,14 +25,14 @@ func sendRequest(url string) (*http.Response) {
 	return resp
 }
 
-func (r *ReCaptcha) buildUrl(script string, v *url.Values) string {
+func (r *reCaptcha) buildUrl(script string, v *url.Values) string {
 	v.Set("key", r.key)
 	v.Set("json", "1")
 
 	return "http://rucaptcha.com/" + script + "?" + v.Encode()
 }
 
-func (r *ReCaptcha) ReportBadCaptcha(id string) {
+func (r *reCaptcha) ReportBadCaptcha(id string) {
 	v := url.Values{}
 	v.Set("method", "userrecaptcha")
 	v.Set("action", "get")
@@ -35,7 +41,7 @@ func (r *ReCaptcha) ReportBadCaptcha(id string) {
 	sendRequest(r.buildUrl("res.php", &v))
 }
 
-func (r *ReCaptcha) GetCaptcha(captchaKey, pageUrl string) {
+func (r *reCaptcha) GetCaptcha(captchaKey, pageUrl string) {
 	v := url.Values{}
 	v.Set("method", "userrecaptcha")
 	v.Set("googlekey", captchaKey)
