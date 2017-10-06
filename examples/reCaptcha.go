@@ -1,14 +1,12 @@
 package main
 
 import (
-	"../../go-helpers"
 	"fmt"
+	"github.com/ninazu/go-helpers"
 )
 
 func main() {
-	//TODO REMOVE KEY
-
-	token, err := ninazu.ReCaptcha("123").
+	token, err := ninazu.ReCaptcha("YOUR_KEY").
 		GetCaptchaSolution("6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-", "https://www.google.com/recaptcha/api2/demo")
 
 	if err != nil {
