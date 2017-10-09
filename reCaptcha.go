@@ -1,5 +1,9 @@
 package ninazu
 
+/**
+* @see https://rucaptcha.com/api-rucaptcha
+*/
+
 import (
 	"net/url"
 	"net/http"
@@ -56,7 +60,7 @@ func (r *reCaptcha) GetCaptchaSolution(captchaKey, pageUrl string) (string, erro
 
 func (r *reCaptcha) trySendJob(url string) (int, error) {
 	if r.turnSend > 10 {
-		return r.returnTurnSend(0, errors.New("MAX_TURN"))
+		return r.returnTurnSend(0, errors.New("MAX_TURN_SEND"))
 	}
 
 	r.turnSend++
@@ -95,8 +99,8 @@ func (r *reCaptcha) trySendJob(url string) (int, error) {
 }
 
 func (r *reCaptcha) tryWaitSolution(url string) (string, error) {
-	if r.turnWait > 20 {
-		return r.returnTurnWait("", errors.New("MAX_TURN"))
+	if r.turnWait > 360 {
+		return r.returnTurnWait("", errors.New("MAX_TURN_WAIT"))
 	}
 
 	r.turnWait++
