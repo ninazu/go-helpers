@@ -3,6 +3,8 @@ package ninazu
 import (
 	"runtime"
 	"strconv"
+	"path/filepath"
+	"os"
 )
 
 func COMPILER_FILE() string {
